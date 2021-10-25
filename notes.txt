@@ -1,0 +1,50 @@
+***Patient******
+- creer un compte
+- faire une demande de rendez-vous pour une consultation ou une prestation
+- peut lister ses rendez-vous(en attente, valider, anuuler)
+- lister ses consultations 
+- lister ses prestations
+(on suppose qu'il ne rate aucun de ses rdv)
+***Secretaire*****
+-valider une demande de rdv (Consultation ou prestation)
+-annuler une rdv
+-lister les disponibilités du medecin ou du responsable de prestation(en gros leur agenda)
+selon la disponibilité du medecin ou du responsable de consultation)
+***Responsable de prestation****
+-faire une prestation 
+-lister les prestations
+-voir details d'une prestation-filtrer par date et par etat(annuler)
+-Annuler prestation 
+
+**Medecin*****
+-Marquer les données d'une consultation
+-Planifier un autre rendez-vous pour le patient
+-rechercher le dossier médical d’un patient(prestations et consultation)
+-lister ses consultations qu'il doit faire
+-voir les détails d’une consultation
+-filtrer par date
+-annuler une consultation
+-peut Faire une ordonnance
+-prescrire prestation
+
+***Mots cles
+-consultations  = avec un médecin généraliste ou spécialiste
+(dentiste , ophtalmologie,..) 
+-prestations = (Analyse,Radio,etc..).
+-ordonnance est possible lors de la consulation ou prestation
+-une consulation peut inclure une recommandation de prestation(un ou +) 
+si le medecin juge cela necessaire
+-il y a +sieurs medecins er un seul responsable de prestation
+
+**Regles de gestions
+-les fonctionnalités sont accessibles après connexion
+-Une consultation ou prestation ne peut être annulée avant 48H de sa date échéance.
+-La demande de rendez-vous est validée par la Secrétaire suivant la
+disponibilité du médecin demandé ou du Responsable de prestation.
+
+******
+-ticket
+-insertion
+-
+
+autres montant
