@@ -1,33 +1,36 @@
-***Patient******
-- creer un compte
+10:14 31/10/2021
+#Patient******
+-creer un compte
 - faire une demande de rendez-vous pour une consultation ou une prestation
 - peut lister ses rendez-vous(en attente, valider, anuuler)
 - lister ses consultations 
 - lister ses prestations
 (on suppose qu'il ne rate aucun de ses rdv)
-***Secretaire*****
+#Secretaire*****
 -valider une demande de rdv (Consultation ou prestation)
 -annuler une rdv
 -lister les disponibilités du medecin ou du responsable de prestation(en gros leur agenda)
 selon la disponibilité du medecin ou du responsable de consultation)
-***Responsable de prestation****
+#Responsable de prestation****
 -faire une prestation 
 -lister les prestations
 -voir details d'une prestation-filtrer par date et par etat(annuler)
 -Annuler prestation 
 
-**Medecin*****
--Marquer les données d'une consultation
--Planifier un autre rendez-vous pour le patient
--rechercher le dossier médical d’un patient(prestations et consultation)
+#Medecin*****
 -lister ses consultations qu'il doit faire
 -voir les détails d’une consultation
 -filtrer par date
 -annuler une consultation
 -peut Faire une ordonnance
+-Marquer les données d'une consultation
+
+-Planifier un autre rendez-vous pour le patient
+-rechercher le dossier médical d’un patient(prestations et consultation)
+
 -prescrire prestation
 
-***Mots cles
+Mots cles
 -consultations  = avec un médecin généraliste ou spécialiste
 (dentiste , ophtalmologie,..) 
 -prestations = (Analyse,Radio,etc..).
@@ -36,15 +39,19 @@ selon la disponibilité du medecin ou du responsable de consultation)
 si le medecin juge cela necessaire
 -il y a +sieurs medecins er un seul responsable de prestation
 
-**Regles de gestions
+Regles de gestions
 -les fonctionnalités sont accessibles après connexion
 -Une consultation ou prestation ne peut être annulée avant 48H de sa date échéance.
 -La demande de rendez-vous est validée par la Secrétaire suivant la
 disponibilité du médecin demandé ou du Responsable de prestation.
 
-******
--ticket
--insertion
--
+DataBase
+User(id, login, password, nom, prenom, nci, role, code, antecedant,specialite, agenda)
+RendezVous(id, date, patient_id, service_provider_id)
+Prestation(id, libelle, resultat, etat, rendez_vous_id )
+Consultation(id, constantes, etat, ordonnance_id, rendez_vous_id )
+Medicament(id, nom, code, posologie, ordonnance_id )
+Ordonnance(id)
 
-autres montant
+Models:
+
