@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JavaFXApplicationGestionRDV/dist/lib/fontawesomefx-8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaFXApplicationGestionRDV/dist/lib/jfoenix.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaFXApplicationGestionRDV/dist/lib/mysql-connector-java-5.1.23-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

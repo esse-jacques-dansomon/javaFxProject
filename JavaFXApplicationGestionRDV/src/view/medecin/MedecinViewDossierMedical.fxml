@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MedecinViewDossierMedicalController">
+   <children>
+      <ComboBox fx:id="ComboBoxTypeService" layoutX="208.0" layoutY="11.0" onAction="#handleChangeService" prefWidth="150.0" />
+      <FontAwesomeIcon fill="#1294ff" iconName="SEARCH" layoutX="549.0" layoutY="27.0" onMouseClicked="#handleSearchPatientByCode" size="1.5em" />
+      <TableView fx:id="tableViewDossierMedical" layoutY="50.0" onMouseClicked="#handleMedicamentPrescription" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="tblcTypeConsultation" prefWidth="117.0" text="TYPE SERVICE" />
+          <TableColumn fx:id="tblcMedecin" prefWidth="139.0" text="MEDECIN" />
+            <TableColumn fx:id="tblcDate" prefWidth="76.0" text="DATE" />
+            <TableColumn fx:id="tblcConstantes" prefWidth="263.0" text="CONSTANTES" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableViewMedicamentPrescriptions" layoutX="218.0" layoutY="250.0" prefHeight="146.0" prefWidth="376.0">
+        <columns>
+          <TableColumn fx:id="tblcNomMedicament" prefWidth="122.0" text="NOM" />
+          <TableColumn fx:id="tblcCodeMedicament" prefWidth="73.0" text="CODE" />
+            <TableColumn fx:id="tblcPosologie" prefWidth="186.0" text="POSOLOGIE" />
+        </columns>
+      </TableView>
+      <Label layoutX="18.0" layoutY="262.0" text="INFORMATIONS DU PATIENT" />
+      <TextField fx:id="labeleCodePatientSearch" layoutX="369.0" layoutY="11.0" />
+      <TextField fx:id="labelNomPatient" layoutX="19.0" layoutY="287.0" prefHeight="25.0" prefWidth="156.0" promptText="Nom Patient" />
+      <TextField fx:id="labelPrenomPatient" layoutX="20.0" layoutY="323.0" prefHeight="25.0" prefWidth="156.0" promptText="Prenom Patient" />
+      <TextField fx:id="labelAntecedantPatient" layoutX="19.0" layoutY="359.0" prefHeight="25.0" prefWidth="156.0" promptText="Antecedants Patient" />
+   </children>
+</AnchorPane>

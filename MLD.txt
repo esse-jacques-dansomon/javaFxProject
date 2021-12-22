@@ -1,0 +1,8 @@
+user(id, nci, nom, prenom, role, login, password, antecedents , id_specialite )
+rdv(id, date, etat, patient_id, specialite_id , type_prestation_id)
+specialite(id, libelle)
+type_prestation(id, libelle)
+consultation(id, constantes, statut[pasFait, fait, anulé], date, patient_id, ordonnance_id )
+prestation(id, date, statut, resultats , patient_id , type_prestation_id  )
+ordonnance(id,id_medicament, posologie )
+medicament(id, code , nom)

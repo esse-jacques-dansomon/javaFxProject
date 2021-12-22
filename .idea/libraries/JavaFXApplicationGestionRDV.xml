@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JavaFXApplicationGestionRDV">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JavaFXApplicationGestionRDV/dist/JavaFXApplicationGestionRDV.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

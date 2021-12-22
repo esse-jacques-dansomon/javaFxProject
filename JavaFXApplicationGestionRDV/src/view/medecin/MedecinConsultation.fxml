@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.MedecinConsultationController">
+   <children>
+      <TableView fx:id="tableViewPateints" layoutY="-1.0" onMouseClicked="#handleSelectedPatient" prefHeight="183.0" prefWidth="268.0" style="-fx-alignment: CENTER;">
+        <columns>
+          <TableColumn fx:id="tblcNomPrenomPatient" prefWidth="115.0" text="Patient" />
+            <TableColumn fx:id="tlbcDate" prefWidth="92.0" text="Date" />
+          <TableColumn fx:id="tblcHeure" prefWidth="59.0" text="Heure" />
+        </columns>
+      </TableView>
+      <TextField fx:id="lblNomPrenomPatient" disable="true" layoutX="302.0" layoutY="82.0" prefHeight="25.0" prefWidth="227.0" promptText="nom patient" />
+      <TextField fx:id="lblCodePatient" disable="true" layoutX="302.0" layoutY="46.0" prefHeight="25.0" prefWidth="227.0" promptText="code du patient" />
+      <FontAwesomeIcon iconName="SEARCH" layoutX="552.0" layoutY="66.0" size="1.5em" />
+      <Label layoutX="305.0" layoutY="115.0" text="Resultats">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="lblResultats" layoutX="305.0" layoutY="137.0" prefHeight="65.0" prefWidth="282.0" />
+      <Button layoutX="444.0" layoutY="368.0" mnemonicParsing="false" onAction="#handleSaveConsultation" prefHeight="25.0" prefWidth="147.0" text="Save Consultation" />
+      <TableView fx:id="tableViewMedecament" layoutY="233.0" prefHeight="164.0" prefWidth="268.0" style="-fx-alignment: CENTER;">
+         <columns>
+            <TableColumn fx:id="tblcNomMedicament" prefWidth="112.0" text="Nom" />
+            <TableColumn fx:id="tblcPosologie" maxWidth="2000.0" prefWidth="155.0" text="Posologie" />
+         </columns>
+      </TableView>
+      <TextField fx:id="nomMedicaments" disable="true" layoutX="311.0" layoutY="251.0" prefHeight="25.0" prefWidth="212.0" promptText="Nom Medicament" />
+      <TextField fx:id="codeMedicament" layoutX="308.0" layoutY="213.0" prefHeight="25.0" prefWidth="212.0" promptText="Code Medicament" />
+      <Button fx:id="buttonCancelAddMedicament" layoutX="312.0" layoutY="331.0" mnemonicParsing="false" onAction="#handleAjoutMedacement" prefHeight="25.0" prefWidth="212.0" text="Prescire Medicament" />
+      <Button fx:id="buttonCancelConsultation" layoutX="309.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleAnnulerConsultation" prefHeight="25.0" prefWidth="129.0" text="Annuler Consultation" />
+      <FontAwesomeIcon iconName="SEARCH" layoutX="554.0" layoutY="233.0" onMouseClicked="#handleSearchMedicament" size="1.5em" />
+      <FontAwesomeIcon fx:id="IconAddMedicamentInBd" iconName="PLUS" layoutX="555.0" layoutY="270.0" onMouseClicked="#handleAddMedicamentInBaseDonnee" size="1.5em" />
+      <ComboBox layoutX="300.0" layoutY="7.0" prefHeight="25.0" prefWidth="282.0" />
+      <Label layoutX="33.0" layoutY="209.0" text="Prescription des medicaments">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="labelPosologie" layoutX="311.0" layoutY="285.0" prefHeight="25.0" prefWidth="212.0" promptText="posologie" />
+   </children>
+</AnchorPane>
