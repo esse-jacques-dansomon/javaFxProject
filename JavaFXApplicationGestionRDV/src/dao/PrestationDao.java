@@ -64,12 +64,15 @@ public class PrestationDao extends DataBase implements IPrestationDao {
     public int insert(Prestation prestation) {
         int id_prestation = 0;
         try {
-            String SQL_INSERT = "INSERT INTO `prestation` (`statut`, `date`, `patient_id`) VALUES ( ?, ?, ?) ";
+            String SQL_INSERT = "INSERT INTO `prestation` (`statut`, `date`, `patient_id`, `type_prestation_id`) VALUES ( ?, ?, ?, ?) ";
+            //String SQL ="INSERT INTO `prestation`(`id`, `date`, `statut`, `resultats`, `patient_id`, `type_prestation_id`) VALUES (?, ?, ?, ?,?)";
             this.openConnexion();
             initPrepareStatement(SQL_INSERT);
-            getPs().setDate(2, prestation.getDate());
+            
             getPs().setString(1, prestation.getStatut());
+            getPs().setDate(2, prestation.getDate());
             getPs().setInt(3, prestation.getPatient().getId());
+            getPs().setInt(4, prestation.getTypePrestation().getId());
             executeUpdate(SQL_INSERT);
             System.out.println("Requette Insert reussite ");
             ResultSet rs = getPs().getGeneratedKeys();

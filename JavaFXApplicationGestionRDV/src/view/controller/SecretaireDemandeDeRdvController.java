@@ -10,6 +10,7 @@ import entity.Medecin;
 import entity.Prestation;
 import entity.RendezVous;
 import entity.TypeConsultation;
+import entity.TypePrestation;
 import entity.TypeService;
 import entity.User;
 import fabrique.Fabrique;
@@ -28,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -72,6 +74,8 @@ public class SecretaireDemandeDeRdvController implements Initializable {
     private TextField lblcNci;
     @FXML
     private ComboBox<User> comboUsersByType;
+    @FXML
+    private DatePicker datePicker;
 
 
     /**
@@ -117,6 +121,7 @@ public class SecretaireDemandeDeRdvController implements Initializable {
                prestation.setStatut("EN_COURS");
                prestation.setDate(this.rdvChosen.getDate());
                prestation.setPatient(this.rdvChosen.getPatient());
+               prestation.setTypePrestation((TypePrestation) this.rdvChosen.getTypeService());
                if(this.service.ValiderPrestation(prestation) != 0 )
                 {
                   this.rdvChosen.setEtat("VALIDE");
@@ -195,8 +200,37 @@ public class SecretaireDemandeDeRdvController implements Initializable {
     @FXML
     private void handleChangeUser(ActionEvent event) {
         this.userChosen = comboUsersByType.getSelectionModel().getSelectedItem();
-        lblcNomUser.setText(this.userChosen.getNom());
-        lblcPrenom.setText(this.userChosen.getPrenom());  
+        if(this.userChosen != null)
+        {
+           lblcNomUser.setText(this.userChosen.getNom()); 
+           lblcPrenom.setText(this.userChosen.getPrenom());
+        }
+
+        
+    }
+
+    @FXML
+    private void handleFiltreParDate(MouseEvent event) {
+        String date = this.datePicker.getValue().toString();
+        System.out.println(date);
+        if(this.datePicker != null)
+        {
+      obvRendezVous = FXCollections
+               .observableArrayList(service.searchAllRdvByEtatAndDate("EN_COURS", date));
+       tblcTypeService.setCellValueFactory(new PropertyValueFactory<>("typeService"));
+       tblcDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+       tblcHeure.setCellValueFactory(new PropertyValueFactory<>("heure"));
+       tblcStatut.setCellValueFactory(new PropertyValueFactory<>("etat"));
+       tblcPatient.setCellValueFactory(
+      cellData -> new SimpleStringProperty( cellData.getValue().getPatient().toString()));
+       tableViewMesRendezVous.setItems(obvRendezVous); 
+        }
+        ViewService.loadALert(AlertType.ERROR, "FIltre impossible", "Veuillez choisir une date");
+    }
+
+    @FXML
+    private void hansdleFiltreAll(ActionEvent event) {
+        this.loadTableViewRendezVous();
     }
     
 }

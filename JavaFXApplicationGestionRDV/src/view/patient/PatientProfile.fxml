@@ -54,7 +54,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="-2.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #0083ff;" text="SE DECONNECTER" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="btnDeconnexion" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="-2.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleLogOut" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #0083ff;" text="SE DECONNECTER" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

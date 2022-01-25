@@ -27,8 +27,8 @@ import service.IService;
  */
 public class PatientRendezVousController implements Initializable {
 
-    private User user = LoginController.getCtrl().getUser();
-    private IService service = Fabrique.getInstanceService();
+    private final User user = LoginController.getCtrl().getUser();
+    private final IService service = Fabrique.getInstanceService();
     private ObservableList<RendezVous> obvRendezVous;
     @FXML
     private TableView<RendezVous> tableViewMesRendezVous;

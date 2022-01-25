@@ -13,58 +13,64 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.LoginController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.LoginController">
    <children>
-      <AnchorPane focusTraversable="true" prefHeight="200.0" prefWidth="200.0">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="613.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label layoutX="31.0" layoutY="28.0" text="Se Connecter">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="109.0" text="Votre Login" textFill="#2699fb">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="labelPassword" layoutX="32.0" layoutY="229.0" prefHeight="39.0" prefWidth="260.0" promptText="Password" />
-            <TextField fx:id="labelLogin" layoutX="30.0" layoutY="137.0" prefHeight="39.0" prefWidth="260.0" promptText="Login" />
-            <Button layoutX="31.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="32.0" prefWidth="260.0" style="-fx-background-color: #2699fb;" text="Se Connecter" />
-            <Label layoutX="34.0" layoutY="201.0" text="Votre Password" textFill="#2699fb">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Text fx:id="txtError" fill="RED" layoutX="30.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login ou mot de passe incorrects">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Text layoutX="29.0" layoutY="353.0" onMouseClicked="#handleIncriptionView" strokeType="OUTSIDE" strokeWidth="0.0" text="Pas de compte ? Creer un compte" textAlignment="CENTER" wrappingWidth="259.9999978542328">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="378.0" prefWidth="306.0" GridPane.columnIndex="1">
-         <children>
-            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="378.0" prefWidth="306.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane focusTraversable="true" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="imageLogin" fitHeight="354.0" fitWidth="279.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/login.png" />
-                     </image>
-                  </ImageView>
+                  <Label layoutX="31.0" layoutY="28.0" text="Se Connecter">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="109.0" text="Votre Login" textFill="#2699fb">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="labelPassword" layoutX="32.0" layoutY="229.0" prefHeight="39.0" prefWidth="260.0" promptText="Password" />
+                  <TextField fx:id="labelLogin" layoutX="30.0" layoutY="137.0" prefHeight="39.0" prefWidth="260.0" promptText="Login" />
+                  <Button layoutX="31.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="32.0" prefWidth="260.0" style="-fx-background-color: #2699fb;" text="Se Connecter" />
+                  <Label layoutX="34.0" layoutY="201.0" text="Votre Password" textFill="#2699fb">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="txtError" fill="RED" layoutX="30.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login ou mot de passe incorrects">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="29.0" layoutY="353.0" onMouseClicked="#handleIncriptionView" strokeType="OUTSIDE" strokeWidth="0.0" text="Pas de compte ? Creer un compte" textAlignment="CENTER" wrappingWidth="259.9999978542328">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
-         </children></AnchorPane>
+            <AnchorPane prefHeight="378.0" prefWidth="306.0" GridPane.columnIndex="1">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="378.0" prefWidth="306.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fx:id="imageLogin" fitHeight="354.0" fitWidth="279.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/login.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
    </children>
-</GridPane>
+</AnchorPane>

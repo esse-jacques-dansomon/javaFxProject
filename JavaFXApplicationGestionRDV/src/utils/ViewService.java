@@ -31,6 +31,16 @@ public class ViewService {
         comboBoxService.getSelectionModel().selectFirst();
     }
     
+    public static void loadComboBoxRole(ComboBox<String> comboBoxService){
+        comboBoxService.getItems().add("ROLE_SECRETAIRE");
+        comboBoxService.getItems().add("ROLE_MEDECIN");
+        comboBoxService.getItems().add("ROLE_RP");
+        comboBoxService.getItems().add("ROLE_ADMIN");
+        comboBoxService.getSelectionModel().selectFirst();
+    }
+    
+
+    
     public static java.sql.Date convertFromJAVADateToSQLDate(
             java.util.Date javaDate) {
         java.sql.Date sqlDate = null;

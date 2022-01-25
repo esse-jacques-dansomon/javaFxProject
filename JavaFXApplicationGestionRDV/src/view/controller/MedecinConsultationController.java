@@ -40,6 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import service.IService;
+import utils.Validator;
 import utils.ViewService;
 
 /**
@@ -122,8 +123,13 @@ public class MedecinConsultationController implements Initializable {
 
     @FXML
     private void handleSaveConsultation(ActionEvent event) {
+       Validator validator = new Validator();
+       validator.isEmptyStrig(lblResultats.getText(), "Resultats");
+       if(validator.isValide())
+       {
        this.ConsultationSelected.setConstantes(lblResultats.getText());
-       this.ConsultationSelected.setStatut("TERMINE");
+
+                 this.ConsultationSelected.setStatut("TERMINE");
        if(this.tableViewMedecament != null){ 
            ordornance.setConsultation(ConsultationSelected);
            //Creation de l'ordoannance
@@ -134,14 +140,27 @@ public class MedecinConsultationController implements Initializable {
            this.loadTableViewAllConsultation();
            this.loadTableViewMedicamentPrescription();   
        }
+
        this.service.updateConsultation(ConsultationSelected);
-       this.loadTableViewAllConsultation();
+       this.loadTableViewAllConsultation(); 
+       }else
+       {
+           validator.showErrorsAlert();
+       }
+
     }
 
     @FXML
     private void handleAjoutMedacement(ActionEvent event) {
+        Validator validator = new Validator();
         String posologie = labelPosologie.getText();
-        Medicament medicament = new Medicament(this.id_medicament,nomMedicaments.getText(),
+        String nomMedicament = nomMedicaments.getText();
+        
+        validator.isEmptyStrig(posologie, "Posologie");
+        validator.isEmptyStrig(nomMedicament, "Nom medicament");
+
+
+        Medicament medicament = new Medicament(this.id_medicament,nomMedicament,
                 codeMedicament.getText());
         Ordonnance od = new Ordonnance(1);
         MedicamentPrescription medicamentPrecription = 
@@ -229,46 +248,52 @@ public class MedecinConsultationController implements Initializable {
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
 
-        TextField username = new TextField();
-        username.setPromptText("Code");
-        TextField password = new TextField();
-        password.setPromptText("Nom");
+        TextField nomMdeci = new TextField();
+        nomMdeci.setPromptText("Code");
+        TextField codeMedi = new TextField();
+        codeMedi.setPromptText("Nom");
 
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(username, 1, 0);
-        grid.add(new Label("Password:"), 0, 1);
-        grid.add(password, 1, 1);
+        grid.add(new Label("Code :"), 0, 0);
+        grid.add(nomMdeci, 1, 0);
+        grid.add(new Label("Nom :"), 0, 1);
+        grid.add(codeMedi, 1, 1);
 
 // Enable/Disable login button depending on whether a username was entered.
         Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
         loginButton.setDisable(true);
 
         // Do some validation (using the Java 8 lambda syntax).
-        username.textProperty().addListener((observable, oldValue, newValue) -> {
+        nomMdeci.textProperty().addListener((observable, oldValue, newValue) -> {
             loginButton.setDisable(newValue.trim().isEmpty());
         });
 
         dialog.getDialogPane().setContent(grid);
 
         // Request focus on the username field by default.
-        Platform.runLater(() -> username.requestFocus());
+        Platform.runLater(() -> nomMdeci.requestFocus());
 
         // Convert the result to a username-password-pair when the login button is clicked.
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
-                return new Pair<>(username.getText(), password.getText());
+                return new Pair<>(nomMdeci.getText(), codeMedi.getText());
             }
             return null;
         });
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
-
-        result.ifPresent(usernamePassword -> {
-            System.out.println("Username=" + usernamePassword.getKey() + 
-                    ", Password=" + usernamePassword.getValue());
-            Medicament medicament = new Medicament(username.getText(),password.getText());
+            
+        Validator validator = new Validator();
+        validator.isEmptyStrig(nomMdeci.getText(), "Nom medeicament");
+        validator.isEmptyStrig(codeMedi.getText(), "Code medeicament");
+        if(validator.isValide()){
+             result.ifPresent(usernamePassword -> {
+            Medicament medicament = new Medicament(nomMdeci.getText(),codeMedi.getText());
             this.service.addMedicament(medicament);
         });
+        }else{
+            validator.showErrorsAlert();
+        }
+       
         
         return 0;
         

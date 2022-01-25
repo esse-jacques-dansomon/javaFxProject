@@ -104,32 +104,19 @@ public class LoginController implements Initializable {
                 switch(this.user.getRole())
                   {
                     case "ROLE_PATIENT":
-                        root = FXMLLoader.load(getClass().getResource("/view/patient/PatientProfile.fxml"));
-                        Scene scene = new Scene(root);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
+                        this.loadPage(root, "/view/patient/PatientProfile.fxml");
                         break;
                     case "ROLE_MEDECIN":
-                        root = FXMLLoader.load(getClass().getResource("/view/medecin/MedecinProfile.fxml"));
-                        Scene scene1 = new Scene(root);
-                        Stage stage1 = new Stage();
-                        stage1.setScene(scene1);
-                        stage1.show();
+                        this.loadPage(root, "/view/medecin/MedecinProfile.fxml");
                         break;
                     case "ROLE_SECRETAIRE":
-                        root = FXMLLoader.load(getClass().getResource("/view/secretaire/SecretaireProfile.fxml"));
-                        Scene scene2 = new Scene(root);
-                        Stage stage2 = new Stage();
-                        stage2.setScene(scene2);
-                        stage2.show();
+                        this.loadPage(root, "/view/secretaire/SecretaireProfile.fxml");
                         break;
                     case "ROLE_PRESTATAIRE":
-                        root = FXMLLoader.load(getClass().getResource("/view/patient/PatientProfile.fxml"));
-                        Scene scene3 = new Scene(root);
-                        Stage stage3 = new Stage();
-                        stage3.setScene(scene3);
-                        stage3.show();
+                        this.loadPage(root, "/view/patient/PatientProfile.fxml");
+                        break;
+                    case "ROLE_ADMIN":
+                        this.loadPage(root, "/view/admin/Dashbord.fxml");
                         break;
                   }
                   
@@ -154,6 +141,16 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             } 
+    }
+    
+    
+    private void loadPage(AnchorPane root, String view) throws IOException
+    {
+        root = FXMLLoader.load(getClass().getResource(view));
+        Scene scene4 = new Scene(root);
+        Stage stage4 = new Stage();
+        stage4.setScene(scene4);
+        stage4.show(); 
     }
     
 }

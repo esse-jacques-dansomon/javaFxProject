@@ -16,5 +16,6 @@ import java.util.List;
 public interface IRendezVousDao extends IDao<RendezVous> {
     public List<RendezVous> findAllByPatientId(User patient);
     public List<RendezVous> findAllByEtat(String etat);
+    public List<RendezVous> findAllByDate(String etat, String date);
 
 }

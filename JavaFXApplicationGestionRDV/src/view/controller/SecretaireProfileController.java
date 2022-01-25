@@ -15,8 +15,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,6 +37,8 @@ public class SecretaireProfileController implements Initializable {
     private AnchorPane anchorContent;
     @FXML
     private Text textBreadcrumb;
+    @FXML
+    private Button btnDeconnexion;
 
     /**
      * Initializes the controller class.
@@ -41,25 +46,35 @@ public class SecretaireProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        this.user = LoginController.getCtrl().getUser();
-        labelUsername.setText(this.user.toString());
-        roleName.setText(this.user.getRole());
-        /*try {
-            //loadView("SecretaireDemandeDeRdv");
+        try {
+            this.user = LoginController.getCtrl().getUser();
+            labelUsername.setText(this.user.toString());
+            roleName.setText(this.user.getRole());
+            loadView("SecretaireDemandeDeRdv");
             //this.textBreadcrumb.setText("home/demande-rdv");
             //this.textBreaCrumdTitle.setText("Demande de Rendez-Vous");
         } catch (IOException ex) {
-            Logger.getLogger(PatientProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+            Logger.getLogger(SecretaireProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
     private void handleSecredaireLogout(ActionEvent event) {
-                    try {
-            loadView("SecretaireProfile");
-            //this.textBreaCrumdTitle.setText("Demande de Rendez-Vous");
-        } catch (IOException ex) {
-            Logger.getLogger(PatientProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                  AnchorPane root;
+        try
+        {
+            Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+            stage.hide();
+            root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage1 =  new Stage();
+            stage1.setScene(scene);
+            stage1.show();
+                   
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
         }
     }
 

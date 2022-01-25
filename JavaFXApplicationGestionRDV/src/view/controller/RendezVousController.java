@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import service.IService;
+import utils.MailSender;
 import utils.ViewService;
 
 /**
@@ -37,7 +38,7 @@ import utils.ViewService;
  */
 public class RendezVousController implements Initializable {
 
-    private final IService service  = Fabrique.getInstanceService();
+    private final IService service = Fabrique.getInstanceService();
     private String serviceChosen;
     private final User userConnected = LoginController.getCtrl().getUser();
     private User patient;
@@ -59,7 +60,6 @@ public class RendezVousController implements Initializable {
     @FXML
     private FontAwesomeIcon iconSearch;
 
-
     /**
      * Initializes the controller class.
      */
@@ -68,89 +68,90 @@ public class RendezVousController implements Initializable {
         ViewService.loadComboBoxService(ComboBoxService);
         loadTypeService(ComboBoxTypeService);
         JFXDatePeckeed.setDayCellFactory(param -> new DateCell() {
-                @Override
-                public void updateItem(LocalDate date, boolean empty) {
-                    super.updateItem(date, empty);
-                    setDisable(empty || date.compareTo(LocalDate.now().plusDays(2)) < 0 );
-                }
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.compareTo(LocalDate.now().plusDays(2)) < 0);
+            }
         });
-        if(this.userConnected.getRole().equalsIgnoreCase("ROLE_PATIENT"))
-        {
+        if (this.userConnected.getRole().equalsIgnoreCase("ROLE_PATIENT")) {
             this.patient = this.userConnected;
             this.labelNomPatient.setVisible(false);
             this.labelCodePatient.setVisible(false);
             this.iconSearch.setVisible(false);
-        }else
-        {
+        } else {
             this.labelNomPatient.setVisible(true);
             this.labelNomPatient.setVisible(true);
-            this.iconSearch.setVisible(true);   
+            this.iconSearch.setVisible(true);
         }
-    }    
-
+    }
 
     @FXML
-    private void handleRdvDemande(MouseEvent event) {
-        LocalTime timeRdv = JFXTimePickeed.getValue();
-        java.sql.Date dateRdv = java.sql.Date.valueOf(JFXDatePeckeed.getValue());
-        String timeRdvString = timeRdv.toString();
+    private void handleRdvDemande(MouseEvent event) throws Exception {
         TypeService typeService = ComboBoxTypeService.getSelectionModel().getSelectedItem();
-        if( this.patient == null )
-        {
-              ViewService.loadALert(Alert.AlertType.ERROR, "Demande de Rendez-VOus",
-                  "Veuillez choisir un patient");  
-        }else{
-                RendezVous rendezVous = new  RendezVous(dateRdv, timeRdvString, patient, typeService );
-          //Creation du rdv
-        int idRdv =  service.createRendezVous(rendezVous);
-        if(idRdv != 0 )
-        {
-          clearFields();
-          ViewService.loadALert(Alert.AlertType.INFORMATION, "Demande de Rendez-VOus",
-                  "votre demande est bien envoyée et en cours de traitement ");
-        }else{
-                  ViewService.loadALert(Alert.AlertType.ERROR, "Demande de Rendez-VOus",
-                  "Une Erreur s'est produite, veuillez recommencer");  
-        }
-        }
        
+             
+        if (null != JFXTimePickeed  &&  JFXTimePickeed != null && typeService != null) {
+              LocalTime timeRdv = JFXTimePickeed.getValue();
+                java.sql.Date dateRdv = java.sql.Date.valueOf(JFXDatePeckeed.getValue());
+                String timeRdvString = timeRdv.toString();
+            if (this.patient == null) {
+                ViewService.loadALert(Alert.AlertType.ERROR, "Demande de Rendez-VOus",
+                        "Veuillez choisir un patient");
+            } else {
+                RendezVous rendezVous = new RendezVous(dateRdv, timeRdvString, patient, typeService);
+                //Creation du rdv
+                int idRdv = service.createRendezVous(rendezVous);
+                if (idRdv != 0) {
+                    clearFields();
+                    ViewService.loadALert(Alert.AlertType.INFORMATION, "Demande de Rendez-VOus",
+                            "votre demande est bien envoyée et en cours de traitement ");
+                      String message = "Mr/Mrs "+ this.patient.getNom() + " votre demande est bien envoyee et en cours de traitement  ";
+                        MailSender.sendMail(this.patient.getLogin(), "CLINIQUE221",message );
+                    
+                } else {
+                    ViewService.loadALert(Alert.AlertType.ERROR, "Demande de Rendez-VOus",
+                            "Une Erreur s'est produite, veuillez recommencer");
+                }
 
+            }
+        } else {
+           ViewService.loadALert(Alert.AlertType.ERROR, "Erreur dans le formulaire", "Veuillez remplir tous les champs");
+        }
 
     }
 
     @FXML
     private void handleChangeService(ActionEvent event) {
-       this.serviceChosen = ComboBoxService.getSelectionModel().getSelectedItem();
-       loadTypeService(ComboBoxTypeService);
+        this.serviceChosen = ComboBoxService.getSelectionModel().getSelectedItem();
+        loadTypeService(ComboBoxTypeService);
     }
 
-    private void loadTypeService(ComboBox<TypeService> cbo)
-    {
-        if( serviceChosen == null)
+    private void loadTypeService(ComboBox<TypeService> cbo) {
+        if (serviceChosen == null) {
             typeServiceObservable = FXCollections.observableArrayList(service.searchAllSpecialite());
-        else{
-            if("consultation".equals(this.serviceChosen.toLowerCase().trim()))
+        } else {
+            if ("consultation".equals(this.serviceChosen.toLowerCase().trim())) {
                 typeServiceObservable = FXCollections.observableArrayList(service.searchAllSpecialite());
-            else
+            } else {
                 typeServiceObservable = FXCollections.observableArrayList(service.searchAllTypePrestation());
+            }
         }
-        cbo.setItems(typeServiceObservable);  
-    } 
-    
-    private void clearFields()
-    {
-     ComboBoxTypeService.getItems().clear();     
+        cbo.setItems(typeServiceObservable);
+    }
+
+    private void clearFields() {
+        ComboBoxTypeService.getItems().clear();
     }
 
     @FXML
     private void handleSearchPatientByCode(MouseEvent event) {
         this.patient = this.service.findPatientByCode(labelCodePatient.getText());
-        if(this.patient != null)
-        {
+        if (this.patient != null) {
             this.labelNomPatient.setText(this.patient.getNom());
-        }else{
-           this.labelNomPatient.clear(); 
+        } else {
+            this.labelNomPatient.clear();
         }
-        
+
     }
 }

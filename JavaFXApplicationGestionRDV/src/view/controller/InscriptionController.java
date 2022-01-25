@@ -24,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import service.IService;
+import utils.Validator;
 import utils.ViewService;
 
 /**
@@ -74,9 +75,17 @@ public class InscriptionController implements Initializable {
         String antecedant = labelAntecedant.getText();
         
         //Validation du formulaire
+        Validator validator = new Validator();
+        validator.isValidMail(login, "login");
+        validator.isEmptyStrig(nom, "Votre nom");
+        validator.isEmptyStrig(code, "Code");
+        validator.isEmptyStrig(prenoms, "Votre Prenom");
+        validator.isEqualWIth(password, confirmedPassword, "Les mots de passe ne correspondent pas ");
         
         
-        //Creation d'un patient 
+        if(validator.isValide())
+        {
+           
         Patient patient  = new Patient(nom,prenoms, login, password,code, antecedant);
         int idPatient  =  service.createPatient(patient);
         if(idPatient != 0 )
@@ -89,7 +98,7 @@ public class InscriptionController implements Initializable {
               this.textErrors.getScene().getWindow().hide();
               AnchorPane root = null;
               try {
-                  root = FXMLLoader.load(getClass().getResource("/views/Profile.fxml"));
+                  root = FXMLLoader.load(getClass().getResource("/view/patient/PatientProfile.fxml"));
                   Scene scene = new Scene(root);
                   Stage stage = new Stage();
                   stage.setScene(scene);
@@ -101,6 +110,9 @@ public class InscriptionController implements Initializable {
         }else{
             ViewService.loadALert(Alert.AlertType.ERROR, "Error", 
                     "Echec Inscription, Veuillez Ressayer");
+        } 
+        }else{
+            validator.showErrorsAlert();
         }
     }
     

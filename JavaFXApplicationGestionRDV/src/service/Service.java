@@ -226,6 +226,11 @@ public class Service implements IService {
             return this.medicamentPrescriptionDao.findAllPrescriptionOfPatient(patient);
     }
 
+    @Override
+    public List<RendezVous> searchAllRdvByEtatAndDate(String etat, String date) {
+        return this.rendezVousDao.findAllByDate(etat, date);
+    }
+
 
 }
 

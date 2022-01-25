@@ -10,7 +10,6 @@ import entity.MedicamentPrescription;
 import entity.Patient;
 import fabrique.Fabrique;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;

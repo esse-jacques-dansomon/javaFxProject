@@ -38,6 +38,7 @@ public interface IService {
 
     //Fonction du package de l'acteur Secretaire
     public List<RendezVous> searchAllRdvByEtat(String etat);
+     public List<RendezVous> searchAllRdvByEtatAndDate(String etat, String date);
     public List<User> searchAllUserByTypeService(int id);
     public List<User> searchAllUserByRoleName(String role);
     public int ValiderConsultation(Consultation consultation);

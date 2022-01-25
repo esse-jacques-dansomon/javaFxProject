@@ -68,7 +68,7 @@ public class RendezVousDao extends DataBase implements IRendezVousDao {
 
     @Override
     public int update(RendezVous rendezVous) {
-        int id_rdv = 0;
+        int id_rdv = 1;
         try {
             String SQL_UPDATE = "UPDATE `rendez_vous` SET etat = ? WHERE id =? ";
             this.openConnexion();
@@ -77,10 +77,7 @@ public class RendezVousDao extends DataBase implements IRendezVousDao {
             this.getPs().setInt(2, rendezVous.getId());
             executeUpdate(SQL_UPDATE);
             System.out.println("Requette Insert reussite ");
-            ResultSet rs = getPs().getGeneratedKeys();
-            if(rs.next())
-                id_rdv = rs.getInt(1);
-            System.out.println(rs);
+           
         } catch (SQLException ex) {
             Logger.getLogger(ConsultationDao.class.getName()).log(Level.SEVERE, null, ex);
         }finally
@@ -182,5 +179,52 @@ public class RendezVousDao extends DataBase implements IRendezVousDao {
         }
         return rendezVousListes;
     }
+
+    
+    @Override
+    public List<RendezVous> findAllByDate(String etat,String date) {
+        
+        List<RendezVous> rendezVousListes = new ArrayList();
+        try {
+            String sql = "SELECT * FROM `rendez_vous` r, user u WHERE r.patient_id = u.id AND r.etat = ? AND r.date like ? ";
+            this.openConnexion();
+            this.initPrepareStatement(sql);
+            this.getPs().setString(1, etat.toUpperCase());
+            this.getPs().setString(2, date);
+            ResultSet rs = this.executeSelect(sql);
+            //Passage Relation en Object RDV
+            while(rs.next())
+            {
+                RendezVous rendezVous = new RendezVous();
+                rendezVous.setId(rs.getInt(1));
+                rendezVous.setDate(rs.getDate("date"));
+                rendezVous.setHeure(rs.getString("heure"));
+                rendezVous.setEtat(rs.getString("etat"));
+                //Recuperation du Patient
+                Patient patient = new Patient();
+                patient.setId(rs.getInt("patient_id"));
+                patient.setNom(rs.getString("nom"));
+                patient.setPrenom(rs.getString("prenom"));
+                //Recuperation du type de service
+                rendezVous.setPatient(patient);
+                
+                
+                int type_consultation_id = rs.getInt("type_consultation_id");
+                int type_prestation_id = rs.getInt("type_prestation_id");
+                if( type_consultation_id != 0 )
+                    rendezVous.setTypeService(new TypeConsultationDao().findById(type_consultation_id));
+                else
+                    rendezVous.setTypeService(new TypePrestationDao().findById(type_prestation_id));
+                
+                rendezVousListes.add(rendezVous);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RendezVousDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            this.closeConnexion();
+        }
+        return rendezVousListes;
+    }
+    
     
 }

@@ -28,7 +28,7 @@ public class ConsultationDao extends DataBase implements IConsultationDao {
     public int insert(Consultation consultation) {
         int id_consultation = 0;
         try {
-            String SQL_INSERT = "INSERT INTO `consultation`( `statut`, `date`, `patient_id`, `medecin_id`, `heure`) VALUES ( ?, ?, ?, ?)";
+            String SQL_INSERT = "INSERT INTO `consultation`( `statut`, `date`, `patient_id`, `medecin_id`, `heure`) VALUES ( ?, ?, ?, ?, ?)";
             this.openConnexion();
             initPrepareStatement(SQL_INSERT);
             getPs().setString(1, consultation.getStatut());

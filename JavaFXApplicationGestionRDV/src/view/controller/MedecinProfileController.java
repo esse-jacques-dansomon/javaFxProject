@@ -15,8 +15,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,6 +37,8 @@ public class MedecinProfileController implements Initializable {
     private AnchorPane anchorContent;
     @FXML
     private Text textBreadcrumb;
+    @FXML
+    private Button btnDeconnexion;
 
     /**
      * Initializes the controller class.
@@ -57,6 +62,22 @@ public class MedecinProfileController implements Initializable {
 
     @FXML
     private void handleSecredaireLogout(ActionEvent event) {
+                      AnchorPane root;
+        try
+        {
+            Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+            stage.hide();
+            root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage1 =  new Stage();
+            stage1.setScene(scene);
+            stage1.show();
+                   
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
     }
 
     @FXML
